@@ -8,4 +8,6 @@ include_directories(.)
 add_executable(SISTOPE_LAB1_1_2024
         LAB/funciones.c
         LAB/funciones.h
-        LAB/main.c)
+        LAB/main.c
+        LAB/filtros.c
+        LAB/lectura-escritura.c)

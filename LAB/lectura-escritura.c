@@ -1,16 +1,15 @@
-//Ejemplo de lectura y escritura de imagen BMP en C
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 
-#pragma pack(push, 1) //cuando se trabaja con uint se usa para leer directamente los bytes de la imagen, push hace que la estructura se lea byte por byte y pop hace que se lea de forma normal
+#pragma pack(push, 1)
 typedef struct {
     // BMP Header | Tipo de dato por bits | Descripción
-    uint16_t type; // Tipo de dato, tiene 2 bytes y es un número que indica si el archivo es BMP a través de las siglas BM
-    uint32_t size; // Tamaño del archivo, tiene 4 bytes y es un número que indica el tamaño del archivo en bytes
+    uint16_t type;      // Tipo de dato, tiene 2 bytes y es un número que indica si el archivo es BMP a través de las siglas BM
+    uint32_t size;      // Tamaño del archivo, tiene 4 bytes y es un número que indica el tamaño del archivo en bytes
     uint16_t reserved1; // Reservado, tiene 2 bytes y es un número que no se utiliza
     uint16_t reserved2; // Reservado, tiene 2 bytes y es un número que no se utiliza
-    uint32_t offset; // Offset, tiene 4 bytes y es un número que indica la posición en bytes donde comienza la información de la imagen
+    uint32_t offset;    // Offset, tiene 4 bytes y es un número que indica la posición en bytes donde comienza la información de la imagen
 } BMPHeader;
 
 typedef struct {
@@ -89,92 +88,4 @@ void free_bmp(BMPImage* image) {
         free(image->data);
         free(image);
     }
-}
-
-
-//funcion para saturar los colores de la imagen, solo se multiplica el rgb por un factor
-BMPImage* saturate_bmp(BMPImage* image, float factor) {
-    BMPImage* new_image = (BMPImage*)malloc(sizeof(BMPImage));
-    new_image->width = image->width;
-    new_image->height = image->height;
-    new_image->data = (RGBPixel*)malloc(sizeof(RGBPixel) * image->width * image->height);
-
-    for (int y = 0; y < image->height; y++) {
-        for (int x = 0; x < image->width; x++) {
-            RGBPixel pixel = image->data[y * image->width + x];
-            pixel.r = (unsigned char)(pixel.r * factor);
-            pixel.g = (unsigned char)(pixel.g * factor);
-            pixel.b = (unsigned char)(pixel.b * factor);
-            new_image->data[y * image->width + x] = pixel;
-        }
-    }
-
-    return new_image;
-}
-
-//funcion para guardar la imagen en un archivo
-void write_bmp(const char* filename, BMPImage* image) {
-    FILE* file = fopen(filename, "wb"); //wb = write binary
-    if (!file) {
-        fprintf(stderr, "Error: No se pudo abrir el archivo.\n");
-        return;
-    }
-
-    BMPHeader header;
-    header.type = 0x4D42;
-    header.size = sizeof(BMPHeader) + sizeof(BMPInfoHeader) + image->width * image->height * sizeof(RGBPixel);
-    header.offset = sizeof(BMPHeader) + sizeof(BMPInfoHeader);
-
-    BMPInfoHeader info_header;
-    info_header.size = sizeof(BMPInfoHeader);
-    info_header.width = image->width;
-    info_header.height = image->height;
-    info_header.planes = 1;
-    info_header.bit_count = 24; // está fijado en 24 en este ejemplo pero puede ser 1, 4, 8, 16, 24 o 32
-    info_header.size_image = image->width * image->height * sizeof(RGBPixel);
-
-    fwrite(&header, sizeof(BMPHeader), 1, file);
-    fwrite(&info_header, sizeof(BMPInfoHeader), 1, file);
-
-
-    // Padding es el contenido de la imagen en sí
-    int padding = (4 - (image->width * sizeof(RGBPixel)) % 4) % 4;
-    // Por cada pixel va a
-    for (int y = image->height - 1; y >= 0; y--) {
-        for (int x = 0; x < image->width; x++) {
-            RGBPixel pixel = image->data[y * image->width + x];
-            fwrite(&pixel, sizeof(RGBPixel), 1, file);
-        }
-
-        RGBPixel padding_pixel = {0};
-        fwrite(&padding_pixel, sizeof(RGBPixel), padding, file);
-    }
-
-    fclose(file);
-}
-
-int main() {
-    const char* filename = "rb.bmp";
-    BMPImage* image = read_bmp(filename);
-    if (!image) {
-        return 1;
-    }
-
-    printf("Ancho de la imagen: %d\n", image->width);
-    printf("Alto de la imagen: %d\n", image->height);
-
-    // Acceder a los píxeles de la imagen
-    for (int y = 0; y < image->height; y++) {
-        for (int x = 0; x < image->width; x++) {
-            RGBPixel pixel = image->data[y * image->width + x];
-            printf("Pixel (%d, %d): R=%d, G=%d, B=%d\n", x, y, pixel.r, pixel.g, pixel.b);
-        }
-    }
-
-    BMPImage* new_image = saturate_bmp(image, 1.1f);
-    write_bmp("saturated.bmp", new_image);
-
-    free_bmp(image);
-    free_bmp(new_image);
-    return 0;
 }
