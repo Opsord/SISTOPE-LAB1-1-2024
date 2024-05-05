@@ -40,8 +40,8 @@ int main(int argc, char *argv[]){
         return 1;
     }
     if(c){
-        printf("La suma de a + b = %d\n", sum(a, b));
-        printf("La resta de a - b = %d\n", resta(a, b));
+        //printf("La suma de a + b = %d\n", sum(a, b));
+        //printf("La resta de a - b = %d\n", resta(a, b));
     }
     printf("Los valores ingresados son:\n  string=%s\n  float=%f\n  a=%d b=%d\n", string, f, a, b);
     printf("Finalizando el programa\n");

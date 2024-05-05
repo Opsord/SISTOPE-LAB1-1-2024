@@ -1,1 +1,45 @@
-.idea/*
+# Archivos objeto
+*.o
+*.ko
+*.obj
+*.elf
+
+# Archivos binarios
+*.bin
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Archivos de depuración
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Archivos de configuración del sistema de compilación
+*.d
+*.dep
+*.hdep
+
+# Archivos temporales
+*.log
+*.swp
+*.bak
+*~
+
+# Archivos generados por CLion
+.idea/
+
+# Archivos generados por CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+cmake-build-debug/*
+
+# Archivos generados por el sistema
+.DS_Store

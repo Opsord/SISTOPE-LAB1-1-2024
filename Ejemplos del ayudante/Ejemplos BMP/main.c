@@ -34,11 +34,15 @@ typedef struct {
     unsigned char b;
 } RGBPixel;
 
+// Agregar pixel de bit
+
 typedef struct {
     int width;
     int height;
     RGBPixel *data; // Puntero a los píxeles de la imagen
 } BMPImage;
+
+// Agregar imagen que sea de pixbit
 
 BMPImage* read_bmp(const char* filename) {
     FILE* file = fopen(filename, "rb"); //rb = read binary
