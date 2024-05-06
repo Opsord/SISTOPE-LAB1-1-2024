@@ -10,4 +10,5 @@ add_executable(SISTOPE_LAB1_1_2024
         LAB/funciones.h
         LAB/main.c
         LAB/filtros.c
-        LAB/lectura-escritura.c)
+        LAB/lectura-escritura.c
+        LAB/estructuras.c)
