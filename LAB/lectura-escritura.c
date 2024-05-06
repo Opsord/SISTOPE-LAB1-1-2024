@@ -27,16 +27,16 @@ BMPImage* read_bmp(const char* filename) {
     BMPImage* image = (BMPImage*)malloc(sizeof(BMPImage));
     image->width = info_header.width;
     image->height = info_header.height;
-    image->data = (RGBPixel*)malloc(sizeof(RGBPixel) * info_header.width * info_header.height);
+    image->data = (Pixel*)malloc(sizeof(Pixel) * info_header.width * info_header.height);
 
     fseek(file, header.offset, SEEK_SET); // fseek(archivo, desplazamiento, origen desde donde se desplaza SEEK_SET = inicio del archivo, SEEK_CUR = posición actual del archivo, SEEK_END = final del archivo)
 
     //se hace padding para que la imagen tenga un tamaño múltiplo de 4, esto se hace para que la imagen sea más rápida de leer
-    int padding = (4 - (info_header.width * sizeof(RGBPixel)) % 4) % 4; // primero se pasan a bytes los píxeles de la imagen y se calcula el residuo de la división entre 4, si el residuo es 0 no hay padding, si el residuo es 1, 2 o 3 se calcula el padding
+    int padding = (4 - (info_header.width * sizeof(Pixel)) % 4) % 4; // primero se pasan a bytes los píxeles de la imagen y se calcula el residuo de la división entre 4, si el residuo es 0 no hay padding, si el residuo es 1, 2 o 3 se calcula el padding
     for (int y = info_header.height - 1; y >= 0; y--) {
         for (int x = 0; x < info_header.width; x++) {
-            RGBPixel pixel;
-            fread(&pixel, sizeof(RGBPixel), 1, file);
+            Pixel pixel;
+            fread(&pixel, sizeof(Pixel), 1, file);
             image->data[y * info_header.width + x] = pixel;
         }
         fseek(file, padding, SEEK_CUR);

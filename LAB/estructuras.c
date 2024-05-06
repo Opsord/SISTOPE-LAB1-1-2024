@@ -25,21 +25,17 @@ typedef struct {
 } BMPInfoHeader;
 #pragma pack(pop)
 
-// Definición de la estructura RGBPixel (Pixel RGB)
+// Definición de la estructura Pixel (Pixel RGB/BIT)
 typedef struct {
     unsigned char r;
     unsigned char g;
     unsigned char b;
-} RGBPixel;
-
-// Definición de la estructura BITPixel (Pixel de bit)
-typedef struct {
     unsigned char bit;
-} BITPixel;
+} Pixel;
 
 // Definición de la estructura BMPImage (Imagen BMP)
 typedef struct {
     int width;
     int height;
-    RGBPixel *data; // Puntero a los píxeles de la imagen
+    Pixel *data; // Puntero a los píxeles de la imagen
 } BMPImage;
