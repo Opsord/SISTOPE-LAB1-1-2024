@@ -30,7 +30,6 @@ typedef struct {
     unsigned char r;
     unsigned char g;
     unsigned char b;
-    unsigned char bit;
 } Pixel;
 
 // Definición de la estructura BMPImage (Imagen BMP)
