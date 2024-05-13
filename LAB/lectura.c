@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#include "estructuras.c"
+#include "lectura.h"
 
     // Apertura del archivo en modo lectura binaria
     BMPImage* read_bmp(const char* filename) {

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#include "estructuras.c"
+#include "filtros.h"
 
 // Saturar una imagen BMP (multiplicar los componentes RGB de cada píxel por un factor)
 BMPImage* saturate_bmp(BMPImage* image, float factor) {

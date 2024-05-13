@@ -6,9 +6,9 @@ set(CMAKE_C_STANDARD 11)
 include_directories(.)
 
 add_executable(SISTOPE_LAB1_1_2024
-        LAB/funciones.c
-        LAB/funciones.h
         LAB/main.c
         LAB/filtros.c
         LAB/lectura.c
-        LAB/estructuras.c)
+        LAB/lectura.h
+        LAB/filtros.h
+        LAB/estructuras.h)

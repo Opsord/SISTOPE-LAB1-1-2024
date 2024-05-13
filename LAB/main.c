@@ -2,48 +2,56 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include "funciones.h"
+#include "lectura.h"
+#include "filtros.h"
+
 
 int main(int argc, char *argv[]){
-    // Option para el getopt
+    // Variables para las opciones
+    char *nombre_prefijo = NULL;
+    int cantidad_filtros = 0;
+    float factor_saturacion = 0.0;
+    int umbral_binarizacion = 0;
+    int umbral_clasificacion = 0;
+    char *nombre_carpeta = NULL;
+    char *nombre_archivo_csv = NULL;
+
+    // Variable para getopt
     int option;
-    // Variables int
-    int a = 0, b = 1;
-    // Variable string
-    char string[100];
-    // Variable float
-    float f = 10.0;
-    // Variables booleanas
-    int c = 0, obligatorio = 0;
-    while((option = getopt(argc, argv, "s:f:a:b:c")) != -1){
+    printf("FUNCIONA");
+
+    // Procesar las opciones
+    while((option = getopt(argc, argv, "N:f:p:u:v:C:R:")) != -1){
         switch(option){
-            case 's':
-                strcpy(string, optarg);
-                obligatorio = 1;
+            case 'N':
+                nombre_prefijo = optarg;
                 break;
             case 'f':
-                f = atof(optarg);
+                cantidad_filtros = atoi(optarg);
                 break;
-            case 'a':
-                a = atoi(optarg);
+            case 'p':
+                factor_saturacion = atof(optarg);
                 break;
-            case 'b':
-                b = atoi(optarg);
+            case 'u':
+                umbral_binarizacion = atoi(optarg);
                 break;
-            case 'c':
-                c = 1;
+            case 'v':
+                umbral_clasificacion = atoi(optarg);
                 break;
+            case 'C':
+                nombre_carpeta = optarg;
+                break;
+            case 'R':
+                nombre_archivo_csv = optarg;
+                break;
+            default:
+                printf("Opción desconocida: %c\n", option);
+                return 1;
         }
     }
-    if(obligatorio == 0){
-        printf("Se debe ingresar unos caracteres\n");
-        return 1;
-    }
-    if(c){
-        //printf("La suma de a + b = %d\n", sum(a, b));
-        //printf("La resta de a - b = %d\n", resta(a, b));
-    }
-    printf("Los valores ingresados son:\n  string=%s\n  float=%f\n  a=%d b=%d\n", string, f, a, b);
-    printf("Finalizando el programa\n");
+
+    // Acá se aplican las operaciones de acuerdo a lo que sea necesario (cantidad de filtros seleccionada)
+    //
+    
     return 0;
 }
