@@ -10,5 +10,6 @@
 // Function prototypes
 BMPImage* read_bmp(const char* filename);
 void free_bmp(BMPImage* image);
+void write_bmp(const char* filename, BMPImage* image);
 
 #endif //LECTURA_H

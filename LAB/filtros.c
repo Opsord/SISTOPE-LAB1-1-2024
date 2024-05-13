@@ -60,11 +60,12 @@ BMPImage* grayscale_bmp(BMPImage* image) {
         for (int x = 0; x < image->width; x++) {
             Pixel pixel = image->data[y * image->width + x];
             // Se altera el valor de cada componente RGB aplicandole un factor
-            // Pixel = (R∗0.3) (G∗0.59) (B∗0.11)
+            // Pixel = (R*0.3) + (G*0.59) + (B*0.11)
             // (se convierte el resultado a unsigned char para que el valor esté en el rango [0, 255])
-            pixel.r = (unsigned char)(pixel.r * 0.3);
-            pixel.g = (unsigned char)(pixel.g * 0.59);
-            pixel.b = (unsigned char)(pixel.b * 0.11);
+            unsigned char gray = (unsigned char)(pixel.r * 0.3 + pixel.g * 0.59 + pixel.b * 0.11);
+            pixel.r = gray;
+            pixel.g = gray;
+            pixel.b = gray;
             new_image->data[y * image->width + x] = pixel;
         }
     }
@@ -72,7 +73,7 @@ BMPImage* grayscale_bmp(BMPImage* image) {
 }
 
 // Binarizar una imagen BMP (convertir a blanco y negro)
-BMPImage* binary_bmp(BMPImage* image) {
+BMPImage* binary_bmp(BMPImage* image, float threshold) {
     // Asignar memoria para la nueva imagen
     BMPImage *new_image = (BMPImage *) malloc(sizeof(BMPImage));
     if (!new_image) {
@@ -88,18 +89,16 @@ BMPImage* binary_bmp(BMPImage* image) {
         free(new_image);
         return NULL;
     }
-    // Convertir los pixeles de la imagen a binario
+    // Binarizar los pixeles de la imagen
     for (int y = 0; y < image->height; y++) {
         for (int x = 0; x < image->width; x++) {
             Pixel pixel = image->data[y * image->width + x];
-            // Convertir a escala de grises
-            unsigned char gray = (unsigned char) (pixel.r * 0.3 + pixel.g * 0.59 + pixel.b * 0.11);
+            // Calcular la intensidad del píxel
+            float intensity = pixel.r + pixel.g + pixel.b;
+            float umbral = threshold * 255 * 3;
 
-            // Establecer un umbral, por ejemplo 128
-            unsigned char threshold = 128;
-
-            // Si el valor del píxel es mayor que el umbral, se convierte en blanco (255), de lo contrario, se convierte en negro (0)
-            if (gray > threshold) {
+            // Si la intensidad del píxel es mayor que el umbral, se convierte en blanco (255), de lo contrario, se convierte en negro (0)
+            if (intensity > umbral) {
                 pixel.r = 255;
                 pixel.g = 255;
                 pixel.b = 255;

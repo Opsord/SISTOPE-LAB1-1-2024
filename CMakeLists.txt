@@ -11,4 +11,8 @@ add_executable(SISTOPE_LAB1_1_2024
         LAB/lectura.c
         LAB/lectura.h
         LAB/filtros.h
-        LAB/estructuras.h)
+        LAB/estructuras.h
+        LAB/clasificacion.h
+        LAB/clasificacion.c
+        LAB/resultados.h
+        LAB/resultados.c)

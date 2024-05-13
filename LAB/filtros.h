@@ -10,6 +10,6 @@
 // Function prototypes
 BMPImage* saturate_bmp(BMPImage* image, float factor);
 BMPImage* grayscale_bmp(BMPImage* image);
-BMPImage* binary_bmp(BMPImage* image);
+BMPImage* binary_bmp(BMPImage* image, float threshold);
 
-#endif //FILTROS_H
+#endif //FILTROS_Hm
