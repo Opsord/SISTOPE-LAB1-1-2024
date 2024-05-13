@@ -5,6 +5,8 @@ set(CMAKE_C_STANDARD 11)
 
 include_directories(.)
 
+
+
 add_executable(SISTOPE_LAB1_1_2024
         LAB/main.c
         LAB/filtros.c
