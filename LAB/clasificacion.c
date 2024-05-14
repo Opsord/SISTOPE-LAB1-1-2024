@@ -1,7 +1,9 @@
 #include <stdbool.h>
 #include <stdio.h>
+
 #include "estructuras.h"
 #include "clasificacion.h"
+
 bool is_nearly_black(BMPImage* image, float threshold) {
     int black_pixels = 0;
     int total_pixels = image->width * image->height;

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <stdbool.h>
+
 #include "resultados.h"
 
 // Function to create a directory

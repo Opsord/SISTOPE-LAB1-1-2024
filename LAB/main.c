@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
 #include <stdbool.h>
+
 #include "lectura.h"
 #include "filtros.h"
 #include "clasificacion.h"
 #include "resultados.h"
-
 
 int main(int argc, char *argv[]) {
     // Variables para las opciones

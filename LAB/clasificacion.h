@@ -1,7 +1,3 @@
-//
-// Created by ivan on 13-05-24.
-//
-
 #ifndef SISTOPE_LAB1_1_2024_CLASIFICACION_H
 #define SISTOPE_LAB1_1_2024_CLASIFICACION_H
 
