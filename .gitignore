@@ -42,3 +42,6 @@ cmake-build-debug/*
 
 # Archivos generados por el sistema
 .DS_Store
+
+# Archivos de build
+build/*

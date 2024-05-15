@@ -1,5 +1,8 @@
 FLAGS = -Wall -lm
 
+main: main.c lectura.o filtros.o clasificacion.o resultados.o
+	gcc $(FLAGS) -o main main.c lectura.o filtros.o clasificacion.o resultados.o
+
 lectura.o: lectura.h lectura.c estructuras.h
 	gcc -c $(FLAGS) lectura.c
 
@@ -11,9 +14,6 @@ clasificacion.o: clasificacion.h clasificacion.c estructuras.h
 
 resultados.o: resultados.h resultados.c
 	gcc -c $(FLAGS) resultados.c
-
-main: main.c lectura.o filtros.o clasificacion.o
-	gcc $(FLAGS) -o main main.c lectura.o filtros.o clasificacion.o
 
 clear:
 	rm -f main *.o
