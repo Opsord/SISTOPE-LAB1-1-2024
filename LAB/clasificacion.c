@@ -7,13 +7,14 @@
 bool is_nearly_black(BMPImage* image, float threshold) {
     int black_pixels = 0;
     int total_pixels = image->width * image->height;
+    float umbral = threshold*255;
 
     // Recorrer todos los píxeles de la imagen
     for (int y = 0; y < image->height; y++) {
         for (int x = 0; x < image->width; x++) {
             Pixel pixel = image->data[y * image->width + x];
             // Verificar si el píxel es negro
-            if (pixel.r == 0 && pixel.g == 0 && pixel.b == 0) {
+            if (pixel.r > umbral  && pixel.g > umbral && pixel.b > umbral) {
                 black_pixels++;
             }
         }
