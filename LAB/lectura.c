@@ -116,6 +116,8 @@ void write_bmp(const char *filename, BMPImage *image)
     header.type = 0x4D42;
     header.size = sizeof(BMPHeader) + sizeof(BMPInfoHeader) + image->width * image->height * sizeof(Pixel);
     header.offset = sizeof(BMPHeader) + sizeof(BMPInfoHeader);
+    header.reserved1 = 0;
+    header.reserved2 = 0;
 
     BMPInfoHeader info_header;
     info_header.size_info = sizeof(BMPInfoHeader);

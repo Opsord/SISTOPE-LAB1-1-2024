@@ -45,3 +45,10 @@ cmake-build-debug/*
 
 # Archivos de build
 build/*
+
+# Ejecutables
+main
+
+# Archivos de resultados
+supercarpeta/*
+superresultados
