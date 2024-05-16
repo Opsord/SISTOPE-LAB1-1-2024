@@ -4,7 +4,9 @@
 
 #include "filtros.h"
 
-// Saturar una imagen BMP (multiplicar los componentes RGB de cada píxel por un factor)
+// Entradas: Una imagen BMP y un factor de saturación
+// Salidas: Una nueva imagen BMP saturada
+// Descripción: Satura una imagen BMP multiplicando los componentes RGB de cada píxel por un factor
 BMPImage* saturate_bmp(BMPImage* image, float factor) {
     // Asignar memoria para la nueva imagen
     BMPImage* new_image = (BMPImage*)malloc(sizeof(BMPImage));
@@ -38,7 +40,9 @@ BMPImage* saturate_bmp(BMPImage* image, float factor) {
     return new_image;
 }
 
-// Convertir una imagen BMP a escala de grises
+// Entradas: Una imagen BMP
+// Salidas: Una nueva imagen BMP en escala de grises
+// Descripción: Convierte una imagen BMP a escala de grises
 BMPImage* grayscale_bmp(BMPImage* image) {
     // Asignar memoria para la nueva imagen
     BMPImage* new_image = (BMPImage*)malloc(sizeof(BMPImage));
@@ -72,7 +76,9 @@ BMPImage* grayscale_bmp(BMPImage* image) {
     return new_image;
 }
 
-// Binarizar una imagen BMP (convertir a blanco y negro)
+// Entradas: Una imagen BMP y un umbral
+// Salidas: Una nueva imagen BMP binarizada
+// Descripción: Binariza una imagen BMP convirtiéndola a blanco y negro según un umbral
 BMPImage* binary_bmp(BMPImage* image, float threshold) {
     // Asignar memoria para la nueva imagen
     BMPImage *new_image = (BMPImage *) malloc(sizeof(BMPImage));

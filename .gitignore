@@ -47,7 +47,7 @@ cmake-build-debug/*
 build/*
 
 # Ejecutables
-main
+LAB/main
 
 # Archivos de resultados
 supercarpeta/*

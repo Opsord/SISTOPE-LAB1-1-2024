@@ -8,6 +8,9 @@
 #include "clasificacion.h"
 #include "resultados.h"
 
+// Entradas: Argumentos de línea de comandos
+// Salidas: Estado de finalización del programa (0 si es exitoso, 1 si hay un error)
+// Descripción: Lee una imagen BMP, aplica varios filtros y escribe los resultados en archivos separados
 int main(int argc, char *argv[])
 {
     // Variables para las opciones
@@ -66,7 +69,6 @@ int main(int argc, char *argv[])
     }
 
     // Primero va la lectura de la imagen
-    // Necesitamos juntar el prefijo con la extensión del archivo
     char nombre_archivo[256];
     sprintf(nombre_archivo, "%s%s", nombre_prefijo, ".bmp");
     printf(nombre_archivo);
