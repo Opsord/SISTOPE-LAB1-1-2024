@@ -23,32 +23,39 @@ int main(int argc, char *argv[])
     int option;
     printf("FUNCIONA\n");
 
-    // Process the options
+    // Procesar las opciones
     while ((option = getopt(argc, argv, "N:f:p:u:v:C:R:")) != -1)
     {
         switch (option)
         {
+            // N es para el nombre antes del .bmp - es obligatorio
         case 'N':
             nombre_prefijo = optarg;
             break;
+            // f es para la cantidad de filtros
         case 'f':
             if (optarg != NULL)
             {
                 cantidad_filtros = atoi(optarg);
                 break;
             }
+            // p es para el factor de saturación
         case 'p':
             factor_saturacion = atof(optarg);
             break;
+            // u es para el umbral de binarización
         case 'u':
             umbral_binarizacion = atof(optarg);
             break;
+            // v es para el umbral de clasificación
         case 'v':
             umbral_clasificacion = atof(optarg);
             break;
+            // C es para el nombre de la carpeta - es obligatorio
         case 'C':
             nombre_carpeta = optarg;
             break;
+            // R es para el nombre del archivo CSV - es obligatorio
         case 'R':
             nombre_archivo_csv = optarg;
             break;
@@ -85,6 +92,8 @@ int main(int argc, char *argv[])
         printf("Error al crear el directorio\n");
     }
 
+    // Los filtros se utilizan en orden
+    // Si se llama 1, se llama el primero no más
     if (cantidad_filtros == 1)
     {
         // Saturación
@@ -103,6 +112,7 @@ int main(int argc, char *argv[])
         printf("Imagen saturada\n");
         write_bmp(output_filename, imagen_saturada);
     }
+    // Si se llaman 2, se llaman los dos primeros
     if (cantidad_filtros == 2)
     {
         // Saturación
@@ -128,6 +138,7 @@ int main(int argc, char *argv[])
         write_bmp(output_filename, imagen_gris);
     }
 
+    // Si se llaman 3, se llaman todos
     if (cantidad_filtros == 3)
     {
         // Saturación

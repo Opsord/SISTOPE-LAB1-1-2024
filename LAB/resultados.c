@@ -5,7 +5,7 @@
 
 #include "resultados.h"
 
-// Function to create a directory
+// Funcón para crear un directorio
 int create_directory(const char *dir) {
     if (mkdir(dir, 0777) == -1) {
         fprintf(stderr, "Error: No se pudo crear el directorio %s.\n", dir);
@@ -14,7 +14,7 @@ int create_directory(const char *dir) {
     return 0;
 }
 
-// Function to create a CSV file with classification results
+// Función para crear el csv de clasificación
 int create_csv(const char *filename, const char *image_name, bool classification) {
     FILE *file = fopen(filename, "a");
     if (!file) {

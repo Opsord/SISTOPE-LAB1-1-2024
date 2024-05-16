@@ -105,13 +105,15 @@ void free_bmp(BMPImage *image)
 // funcion para guardar la imagen en un archivo
 void write_bmp(const char *filename, BMPImage *image)
 {
+    // Se abre el archivo en modo escritura binaria
     FILE *file = fopen(filename, "wb"); // wb = write binary
-    if (!file)
+    if (!file) // Si no lo puede abrir, imprimimos un error y terminamos
     {
         fprintf(stderr, "Error: No se pudo abrir el archivo.\n");
         return;
     }
 
+    // Se entrega el header
     BMPHeader header;
     header.type = 0x4D42;
     header.size = sizeof(BMPHeader) + sizeof(BMPInfoHeader) + image->width * image->height * sizeof(Pixel);
@@ -119,6 +121,7 @@ void write_bmp(const char *filename, BMPImage *image)
     header.reserved1 = 0;
     header.reserved2 = 0;
 
+    // Se entrega la info del header
     BMPInfoHeader info_header;
     info_header.size_info = sizeof(BMPInfoHeader);
     info_header.width = image->width;
@@ -127,12 +130,13 @@ void write_bmp(const char *filename, BMPImage *image)
     info_header.bit_count = 24; // está fijado en 24 en este ejemplo pero puede ser 1, 4, 8, 16, 24 o 32
     info_header.size_image = image->width * image->height * sizeof(Pixel);
 
+    // Se escriben los headers en el archivo
     fwrite(&header, sizeof(BMPHeader), 1, file);
     fwrite(&info_header, sizeof(BMPInfoHeader), 1, file);
 
     // Padding es el contenido de la imagen en sí
     int padding = (4 - (image->width * sizeof(Pixel)) % 4) % 4;
-    // Por cada pixel va a
+    // Vamos a escribir cada pixel en el archivo
     for (int y = image->height - 1; y >= 0; y--)
     {
         for (int x = 0; x < image->width; x++)
@@ -145,5 +149,6 @@ void write_bmp(const char *filename, BMPImage *image)
         fwrite(&padding_pixel, sizeof(Pixel), padding, file);
     }
 
+    // Cerramos el archivo al dejar de usarlo
     fclose(file);
 }
