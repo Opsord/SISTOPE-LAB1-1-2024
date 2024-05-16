@@ -9,7 +9,7 @@
 // Salidas: 0 si el directorio se creó con éxito, 1 si hubo un error
 // Descripción: Esta función intenta crear un nuevo directorio con el nombre especificado.
 int create_directory(const char *dir) {
-    if (mkdir(dir) == -1) {
+    if (mkdir(dir, 0777) == -1) {
         fprintf(stderr, "Error: No se pudo crear el directorio %s.\n", dir);
         return 1;
     }
