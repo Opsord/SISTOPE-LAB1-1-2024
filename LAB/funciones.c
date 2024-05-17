@@ -127,7 +127,6 @@ BMPImage* binary_bmp(BMPImage* image, float threshold) {
     bool is_nearly_black(BMPImage* image, float threshold) {
         int black_pixels = 0; // Contador de pixeles negros
         int total_pixels = image->width * image->height; // Contador de pixeles en total
-        float umbral = threshold*255; // El umbral entregado está entre 0 y 1, pero nuestros pixeles van desde el 0 hasta el 255
 
         // Recorrer todos los píxeles de la imagen
         for (int y = 0; y < image->height; y++) { // Para cada posición de los pixeles
