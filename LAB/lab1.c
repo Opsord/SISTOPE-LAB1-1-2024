@@ -4,8 +4,7 @@
 #include <stdbool.h>
 
 #include "lectura.h"
-#include "filtros.h"
-#include "clasificacion.h"
+#include "funciones.h"
 #include "resultados.h"
 
 // Entradas: Argumentos de línea de comandos
@@ -71,8 +70,6 @@ int main(int argc, char *argv[])
     // Primero va la lectura de la imagen
     char nombre_archivo[256];
     sprintf(nombre_archivo, "%s%s", nombre_prefijo, ".bmp");
-    printf(nombre_archivo);
-    printf("\n");
     // Ahora se llama a la lectura
     BMPImage *imagen = read_bmp(nombre_archivo);
     if (imagen == NULL)

@@ -1,16 +1,13 @@
 FLAGS = -Wall -lm
 
-main: main.c lectura.o filtros.o clasificacion.o resultados.o
-	gcc $(FLAGS) -o main main.c lectura.o filtros.o clasificacion.o resultados.o
+main: lab1.c lectura.o resultados.o
+	gcc $(FLAGS) -o lab1 lab1.c lectura.o funciones.o resultados.o
 
 lectura.o: lectura.h lectura.c estructuras.h
 	gcc -c $(FLAGS) lectura.c
 
-filtros.o: filtros.h filtros.c estructuras.h
-	gcc -c $(FLAGS) filtros.c
-
-clasificacion.o: clasificacion.h clasificacion.c estructuras.h
-	gcc -c $(FLAGS) clasificacion.c
+funciones.o: funciones.h funciones.c
+	gcc -c $(FLAGS) funciones.c
 
 resultados.o: resultados.h resultados.c
 	gcc -c $(FLAGS) resultados.c
